@@ -32,4 +32,5 @@ Email
 Password (that must be hashed before being saved in the DB).
 
 #Explanatory video of the web application
+
 VIDEO: https://drive.google.com/file/d/1x95IC9Ru016xkvsZT180AanWNItII9Uz/view?usp=sharing
