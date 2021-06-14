@@ -16,32 +16,6 @@ users/:id put method: To modify the data of a user
 users/:id delete method: To delete a user
 All routes are being secured with JWT-based authorization/authentication. (Except for login, obviously).
 
-Views to support the functionality:
-A grid for clients is not needed as a client must not see the info from other clients.
-Some operations can be done only by a client (use JWT and middleware to handle this):
-Buying.
-Deleting or editing herself. This can be verified by including in the generated JWT token the id of the user. If the user wants to delete or edit, it must be the same id in the token as in the route.
-Have an admin/root user created by default. This can be done as soon as the app is started.
-The admin root is the only one that can add or remove products.
-It is recommended to send the JWT as a cookie, so automatically it is sent by the web browser in further requests.
-Put an expiration date in the token (at login).
-Implement the logout functionality to delete such cookie.
-About buying (/cart route):
-
-As usual, keep the list/container of products together with a total label. Notice that now you will have quantities. It is better to have the info in a JavaScript array, so you recalculate using that.
-You can use an autocomplete widget or a dropdown list to show all the products.
-To keep things simple, you may download all the products in an AJAX/AXIOS call and keep them locally (we know this is not optimal for a massive list of products).
-https://www.npmjs.com/package/bootstrap-4-autocomplete (Links to an external site.) https://jsfiddle.net/Honatas/n943qob1/5/ (Links to an external site.)
-https://jqueryui.com/autocomplete/ (Links to an external site.)
-A button to “Finalize purchase” or “Buy”.
-The id’s of products and quantities should be sent in the POST request to the server.
-Again, having the items in a JavaScript array makes things easier here.
-The server will “symbolize” that the payment is done.
-No need to worry about collecting card details and that stuff.
-A success response (200) by the server is generated, the cart should be emptied.
-This page should show a message like “Welcome USER_NAME” with the avatar of the user.
-Use a template engine like EJS.
- 
 
 Regarding schemas for DB:
 
@@ -50,6 +24,7 @@ Name
 Brand
 Price
 Optional (product Image)
+
 Users’ schema:
 Name
 Avatar (it is an image).
