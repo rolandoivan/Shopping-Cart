@@ -1,0 +1,67 @@
+<!-- This file is given to the client in the main route -->
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Login</title>
+</head>
+<body>
+    <div class="p-3 mb-2 bg-light text-dark" style="width: 700px">
+        <div class="d-flex justify-content-center">
+            <h1 class="text-secondary">Login</h1>
+        </div>
+        <form>
+
+            <label for="txtEmail">Email:</label>
+            <input type="email" class="form-control"  id="txtEmail" style="width: 640px" placeholder="example@email.com"><br>
+
+            <label for="txtPassword">Password:</label>
+            <input type="password" class="form-control"  id="txtPassword" style="width: 640px" placeholder="Password"><br>
+
+            <input type="submit" class="btn btn-primary" id="submit" value="Login">
+        </form>
+        <button id="btnAdd" class="btn btn-link">Register new user</button>
+    </div>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            const txtEmail = document.getElementById('txtEmail');
+            const txtPassword = document.getElementById('txtPassword');
+
+            const btnAdd = document.getElementById('btnAdd');
+
+            const btnSubmit = document.getElementById('submit');
+            btnSubmit.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                let email = txtEmail.value.trim();
+                let password = txtPassword.value;
+
+                if (email === '') { alert('Input your email'); return; }
+                if (password === '') { alert('Input your password'); return; }
+
+                axios.post('http://127.0.0.1:3000/login', { email: email, password: password })
+                    .then(response => {
+                        console.log(response);
+                        alert(`Succesful login, redirecting to main`);
+                        if (email == "admin") {
+                            window.location.replace('http://127.0.0.1:3000/products/all');
+                        } else {
+                            window.location.replace('http://127.0.0.1:3000/shop');
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error.response);
+                        alert(`Invalid credentials ${error.response}`);
+                    });
+            });
+            btnAdd.addEventListener('click', () => {
+                window.location.replace(`http://127.0.0.1:3000/users/register`);
+            });
+        </script>
+</body>
+</html>
+
